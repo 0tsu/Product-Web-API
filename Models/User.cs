@@ -7,5 +7,7 @@
         public string Email { get; set; }
         public string PasswordHash { get; set; }
         public DateTime DataCreate { get; set; } = DateTime.Now;
+
+        public string Role { get; set; }
     }
 }

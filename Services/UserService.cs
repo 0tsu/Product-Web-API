@@ -44,7 +44,8 @@ namespace Estudo.Services
             {
                 Name = dto.Name,
                 Email = dto.Email,
-                PasswordHash = BCrypt.Net.BCrypt.HashPassword(dto.Password)
+                PasswordHash = BCrypt.Net.BCrypt.HashPassword(dto.Password),
+                Role = dto.Role
             };
 
             _repository.Add(user);
