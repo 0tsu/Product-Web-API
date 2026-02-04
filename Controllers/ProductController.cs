@@ -33,7 +33,7 @@ namespace Estudo.Controllers
             return Ok(product);
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Policy = "ProductCreate")]
         [HttpPost]
         public IActionResult Post(ProductCreateDto dto)
         {

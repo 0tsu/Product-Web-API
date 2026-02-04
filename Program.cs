@@ -77,6 +77,11 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("ProductCreate", policy => policy.RequireClaim("permission", "product.create"));
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

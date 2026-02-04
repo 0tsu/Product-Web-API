@@ -1,4 +1,6 @@
-﻿namespace Estudo.Models
+﻿using Product_Web_API.Models;
+
+namespace Estudo.Models
 {
     public class User
     {
@@ -8,6 +10,6 @@
         public string PasswordHash { get; set; }
         public DateTime DataCreate { get; set; } = DateTime.Now;
 
-        public string Role { get; set; }
+        public ICollection<UserRole> Roles { get; set; } = new List<UserRole>();
     }
 }
