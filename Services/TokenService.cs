@@ -18,11 +18,27 @@ namespace Estudo.Services
 
         public string CreateToken(User user)
         {
-            var claims = new[]
+            var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim(ClaimTypes.Email, user.Email),
+                new Claim(ClaimTypes.Name, user.Name)
             };
+
+            foreach(var role in user.Roles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role.Role.Name));
+            }
+
+            var permissions = user.Roles
+                .SelectMany(r => r.Role.RolePermissions)
+                .Select(rp => rp.Permission.Name)
+                .Distinct();
+
+            foreach(var permission in permissions)
+            {
+                claims.Add(new Claim("permission", permission));
+            }
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
 

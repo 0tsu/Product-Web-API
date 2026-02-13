@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Estudo.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class ProductController : Controller
@@ -17,7 +18,7 @@ namespace Estudo.Controllers
             _service = service;
         }
 
-        [Authorize]
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult Get()
             => Ok(_service.ListAll());
@@ -32,6 +33,7 @@ namespace Estudo.Controllers
             return Ok(product);
         }
 
+        [Authorize(Policy = "ProductCreate")]
         [HttpPost]
         public IActionResult Post(ProductCreateDto dto)
         {
